@@ -2,6 +2,7 @@ package eu.kanade.tachiyomi.extension.id.doujindesu
 
 import android.app.Application
 import android.content.SharedPreferences
+import android.util.Log
 import android.widget.Toast
 import androidx.preference.EditTextPreference
 import androidx.preference.PreferenceScreen
@@ -328,10 +329,12 @@ class DoujinDesu : ParsedHttpSource(), ConfigurableSource {
                 is CategoryNames -> {
                     val category = filter.values[filter.state]
                     url.addQueryParameter("typex", category.key)
+                    Log.e("DoujinDesu", "CategoryNames")
                 }
                 is OrderBy -> {
                     val order = filter.values[filter.state]
                     url.addQueryParameter("order", order.key)
+                    Log.e("DoujinDesu", "OrderBy")
                 }
                 is GenreList -> {
                     filter.state
@@ -341,10 +344,12 @@ class DoujinDesu : ParsedHttpSource(), ConfigurableSource {
                                 list.forEach { genre -> url.addQueryParameter("genre[]", genre.id) }
                             }
                         }
+                    Log.e("DoujinDesu", "GenreList")
                 }
                 is StatusList -> {
                     val status = filter.values[filter.state]
                     url.addQueryParameter("statusx", status.key)
+                    Log.e("DoujinDesu", "StatusList")
                 }
                 else -> {}
             }
